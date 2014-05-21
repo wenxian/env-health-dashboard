@@ -1,0 +1,58 @@
+
+<table class="table table-hover table-condensed">
+
+    {% if bigscreen == "true" %}
+        <thead class="large_font">
+    {% else %}
+        <thead>
+    {% endif %}
+    <tr>
+        <th class="text_center">Env</th>
+        <th class="text_center">Deploy</th>
+        <th class="text_center">Host Pool</th>
+        <th class="text_center">Web Sanity</th>
+        <th class="text_center">Test&nbsp;Job Queue</th>
+        {% if not bigscreen == "true" %}
+        <th></th>
+        {% endif %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for env_check in portlet.env_check_list %}
+    <tr>
+        {% if bigscreen == "true" %}
+        <td class="small_width large_font">
+        {% else %}
+        <td class="small_width medium_font">
+        {% endif %}
+            <a href="/env/{{ brand }}.{{ env_check.env }}">{{ env_check.env }}</a>
+        </td>
+        <td class="icon text_center">
+            <a href="/env/{{ brand }}.{{ env_check.env }}">
+                {% if env_check.job_status.status.url %}
+                    <img class="{{ icon_class }}" src="{{ env_check.job_status.status.url }}" alt="{{ env_check.job_status.status.description }}" title="{{ env_check.job_status.status.description }}">
+                {% endif %}
+            </a>
+        </td>
+        <td class="icon text_center">
+            <a href="/env/{{ brand }}.{{ env_check.env }}">
+                <img class="{{ icon_class }}" src="{{ env_check.env_status.status.url }}" alt="{{ env_check.env_status.status.description }}" title="{{ env_check.env_status.status.description }}">
+            </a>
+        </td>
+        <td class="icon text_center">
+            <a href="/env/{{ brand }}.{{ env_check.env }}">
+                <img class="{{ icon_class }}" src="{{ env_check.web_sanity.status.url }}" alt="{{ env_check.web_sanity.status.description }}" title="{{ env_check.web_sanity.status.description }}">
+            </a>
+        </td>
+        <td class="icon text_center">
+            {% if env_check.test_job_queue.status.url %}
+             <a href="/env/{{ brand }}.{{ env_check.env }}">
+                 <img class="{{ icon_class }}" src="{{ env_check.test_job_queue.status.url }}" alt="{{ env_check.test_job_queue.status.description }}" title="{{ env_check.web_sanity.status.description }}">
+             </a>
+            {% endif %}
+
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>

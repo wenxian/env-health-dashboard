@@ -1,0 +1,31 @@
+{% autoescape off %}
+  <table class='table table-condensed'>
+          <tr>
+
+              <td class="icon">
+                        <img class="icon" src="{{ portlet.status_dict.status.status.url }}">
+              </td>
+              <td class="medium_width"><a href="{{ portlet.status_dict.link }}" target="_blank">{{ portlet.status_dict.description }}</a></td>
+              <td>
+                  {% if portlet.status_dict.env_status_failure_job_list %}
+                      {% for failure_job in portlet.status_dict.env_status_failure_job_list %}
+                          {% if failure_job.link %}
+                          <b><a href="{{ failure_job.link }}" target="_blank">{{ failure_job.job_name }}</a><br></b>
+                          {% endif %}
+                          <div style="display: inline-block;">
+                              {% for test_result in failure_job.env_status_failure_test_list %}
+                              &nbsp;&nbsp;<a href="{{ test_result.test_result_level_url }}" target="_blank">
+                                      {{ test_result.test_result_description }}
+                                  </a>
+                              <br>
+                              {% endfor %}
+                          </div>
+                          <br>
+                      {% endfor %}
+                  {% else %}
+                      {{ portlet.status_dict.status.status.description }}
+                  {% endif %}
+              </td>
+          </tr>
+  </table>
+{% endautoescape %}

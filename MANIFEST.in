@@ -1,0 +1,7 @@
+include version.properties
+include version.py
+include manage.py
+include LICENSE
+include README.rst
+recursive-include env_health_dashboard/static *
+recursive-include env_health_dashboard/templates *

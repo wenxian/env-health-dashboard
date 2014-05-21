@@ -1,0 +1,27 @@
+{% autoescape off %}
+    {% if portlet.tickets %}
+        <table class="table table-condensed">
+            <tr>
+                <th>ID</th>
+                {% spaceless %}
+                    {% for column in portlet.columns %}
+                            <th>{{ column }}</th>
+                    {% endfor %}
+                {% endspaceless %}
+            </tr>
+        {% for ticket in portlet.tickets %}
+            <tr>
+                <td><a href="{{ ticket.link }}" target="_blank">{{ ticket.key }}</a></td>
+                {% for field in ticket.columns_value_list %}
+                    <td>{{ field }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <h5>There are no tickets</h5>
+    {% endif %}
+
+    <a href="{{ portlet.footlink }}" target="_blank">View Details in Jira</a>
+
+{% endautoescape %}

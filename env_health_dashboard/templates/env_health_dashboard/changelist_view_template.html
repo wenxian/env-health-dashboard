@@ -1,0 +1,14 @@
+{% autoescape off %}
+<table class="table">
+    {% for pool_server_key,pool_server in portlet.pool_server_version_dict.items %}
+        <tr>
+            <td>
+                <b>{{ pool_server_key }}</b>
+                <br>
+                 {% if pool_server.hosts %}&nbsp;&nbsp;hosts: {{ pool_server.hosts }}<br>{% endif %}
+                 {% if pool_server.pools %}&nbsp;&nbsp;pools: {{ pool_server.pools }}{% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endautoescape %}

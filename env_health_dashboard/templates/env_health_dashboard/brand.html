@@ -1,0 +1,37 @@
+{% extends 'env_health_dashboard/base.html' %}
+
+
+{% block extra_head %}
+<META http-equiv="refresh" content="{{ refresh_seconds }}">
+{% endblock %}
+
+{% block title %} Non-Production EnvHealthDashbaord | {{ env|capfirst }} {% endblock %}
+
+{% block header %} Non-Production Environment Health | {{ brand|upper }}{% endblock %}
+
+{% block navigation_tab %}
+    {% for item in brand_list %}
+        {% if brand == item %}<li class="active">{% else %}<li>{% endif %}<a href="/brand/{{ item }}">{{ item | upper }}</a></li>
+    {% endfor %}
+{% endblock %}
+
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        {% for portlet in portlet_list %}
+            {% include "env_health_dashboard/portlet_with_frame.html" %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<h6>
+    <span class="glyphicon glyphicon-time"></span> Page Loaded: {{ timestamp }}&nbsp;&nbsp;
+    <span class="glyphicon glyphicon-refresh"></span> Next Refresh: {{ next_refresh_timestamp }}&nbsp;&nbsp;
+    <span class="glyphicon glyphicon-envelope"></span> Contact reliabilityeng@shutterfly.com
+</h6>
+
+{% endblock %}
